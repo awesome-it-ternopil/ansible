@@ -1,0 +1,53 @@
+---
+  - name: Install dependencies
+    apt: name={{ item }} state=latest update_cache=yes cache_valid_time=36000
+    with_items:
+      - tar
+      - unzip
+
+  - name: Download IntelliJ
+    get_url: url=https://download.jetbrains.com/idea/ideaIC-2016.2.5.tar.gz dest=/tmp/idea.tar.gz
+
+  - name: Ensure directory exists
+    file:
+      state=directory
+      mode=0755
+      dest=/opt/idea
+
+  - name: Untar IntelliJ
+    unarchive:
+      copy=no
+      src=/tmp/idea.tar.gz
+      dest=/opt
+
+  - shell: ls -d /opt/idea-IC-*
+    register: intellij_version
+
+  - name: Move IntelliJ folder
+    command: "mv {{intellij_version.stdout}} /opt/intellij"
+    args:
+      chdir: /opt
+    ignore_errors: true
+
+  - name: Create symlink
+    file:
+      src=/opt/intellij/bin/idea.sh
+      dest=/usr/bin/idea
+      state=link
+    become: yes
+
+  - name: Create desktop entry
+    template:
+      src={{role_path}}/templates/desktopentry.j2
+      dest=/usr/share/applications/intellij.desktop
+      mode=755
+    with_items:
+      - {
+        name: "IntelliJ IDEA",
+        exec: "/opt/intellij/bin/idea.sh",
+        icon: "/opt/intellij/bin/idea.png",
+        comment: "Develop with Intellij!",
+        categories: "Development;IDE",
+        startupwmclass: "jetbrains-intellij"
+      }
+

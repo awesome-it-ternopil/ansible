@@ -1,0 +1,11 @@
+---
+# Midnigth commander installation
+- name: Add repo
+  become: True
+  apt_repository: repo='ppa:eugenesan/ppa'
+- name: System update
+  become: True
+  apt: update_cache=true
+- name: Install mc
+  become: True
+  apt: name=mc state=present update_cache=yes

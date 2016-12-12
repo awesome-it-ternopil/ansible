@@ -1,0 +1,14 @@
+---
+# SBT installation
+- name: Add link
+  become: True
+  command: echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+- name: Add key
+  become: True
+  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
+- name: System update
+  become: True
+  apt: update_cache=true
+- name: Install sbt
+  become: True
+  apt: name=sbt state=latest update_cache=yes

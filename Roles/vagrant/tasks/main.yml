@@ -1,0 +1,8 @@
+---
+# Vagrant installation
+- name: Downloading vagrant
+  get_url:
+    url: "https://releases.hashicorp.com/vagrant/{{ vagrant_release }}/{{ vagrant_dep_version }}.deb"
+    dest: "{{ download_destination }}"
+- name : Install vagrant
+  apt: deb="{{ download_destination }}/{{ vagrant_dep_version }}.deb"
