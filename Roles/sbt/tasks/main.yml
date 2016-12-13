@@ -1,14 +1,28 @@
 ---
-# SBT installation
-- name: Add link
-  become: True
-  command: echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-- name: Add key
-  become: True
-  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
-- name: System update
-  become: True
-  apt: update_cache=true
-- name: Install sbt
-  become: True
-  apt: name=sbt state=latest update_cache=yes
+- name: 'Installing dependencies'
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+- name: 'Adding APT key'
+  become: yes
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 642AC823
+
+- name: 'Adding APT repository'
+  become: yes
+  apt_repository:
+    repo: deb https://dl.bintray.com/sbt/debian /
+    state: present
+    update_cache: yes
+
+- name: 'Install SBT package'
+  become: yes
+  package:
+    name: sbt
+    state: latest
+...

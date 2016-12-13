@@ -5,11 +5,7 @@
   become: True
 
   roles:
-   - git
-   - jdk
-   - vagrant
-   - idea
-   - mc
+    - sbt
 
 
    
