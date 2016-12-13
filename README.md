@@ -1,2 +1,4 @@
 # ansible
-Run ansible playbook ansible-playbook main.yml --extra-vars "user=USERNAME"
+Run ansible playbook
+1. cd Roles/
+2. sudo ansible-playbook main.yml --extra-vars "user=USERNAME"
