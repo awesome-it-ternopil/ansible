@@ -1,0 +1,49 @@
+- name: Install server
+  become: True
+  apt:
+   name: mysql-server
+   state: latest
+   update_cache: yes
+
+- name: Install client
+  become: True
+  apt:
+   name: mysql-client
+   state: latest
+   update_cache: yes
+
+- name: Install python-pip
+  become: True
+  apt:
+   name: python-pip
+   state: latest
+   update_cache: yes
+
+- name: Install python-dev
+  become: True
+  apt:
+   name: python-dev
+   state: present
+   update_cache: yes
+
+- name: Install libmysqlclient-dev
+  become: True
+  apt:
+   name: libmysqlclient-dev
+   state: present
+   update_cache: yes
+
+- name: Install MySQL-python
+  become: True
+  pip:
+   name: MySQL-python
+   state: present
+
+- name: Create mysql user
+  become: yes
+  mysql_user: >
+    name=root
+    password=root
+    priv="*.*:ALL PRIVILEGES"
+    state=present
+

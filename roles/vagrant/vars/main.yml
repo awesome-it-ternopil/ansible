@@ -1,0 +1,3 @@
+vagrant_release: 1.8.6
+vagrant_dep_version: vagrant_1.8.6_x86_64
+download_destination: /home/{{ user }}/Documents

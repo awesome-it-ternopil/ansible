@@ -1,0 +1,19 @@
+---
+- name: Add "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" to /etc/apt/sources.list
+  become: True
+  shell: echo "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" >> /etc/apt/sources.list
+
+- name: Download and register
+  become: True
+  shell: wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+
+- name: Download and register
+  become: True
+  shell: wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+
+- name: Install virtualbox
+  become: True
+  apt:
+   name: virtualbox-5.1
+   state: latest
+   update_cache: yes

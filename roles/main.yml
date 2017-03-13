@@ -7,10 +7,11 @@
   roles:
    - git
    - jdk
-   - sbt
    - vagrant
    - idea
    - mc
-
+   - sbt
+   - virtualbox
+   - mysql
 
    
