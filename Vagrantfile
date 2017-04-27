@@ -7,9 +7,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 #    config.ssh.insert_key = false
     config.ssh.forward_agent = true
    config.ssh.username = "vagrant"
-#    config.ssh.username = "vagrant"
-    config.ssh.insert_key = true
-    ansible_ssh_private_key_file= '~/.vagrant.d/insecure_private_key'
+    config.ssh.username = "vagrant"
+#    config.ssh.insert_key = true
+#    ansible_ssh_private_key_file= '~/.vagrant.d/insecure_private_key'
 
 
     config.vm.provider "virtualbox" do |vb|
@@ -25,9 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
    config.vm.define "ubuntu_vm", primary: true do |ubuntu_vm|
      ubuntu_vm.vm.network "private_network",  ip: "192.168.33.50"
-#     ubuntu_vm.vm.box = "precise64"
-    ubuntu_vm.vm.box = "v0rtex/xenial64"
-#     ubuntu_vm.vm.box = "ubuntu/xenial64"
+     ubuntu_vm.vm.box = "bento/ubuntu-16.04"
    end
 
 
@@ -41,6 +39,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 #  config.vm.box = "bento/centos-7.1"
 #     config.vm.box = "bento/ubuntu-16.04"
+#    ubuntu_vm.vm.box = "v0rtex/xenial64"
+#     ubuntu_vm.vm.box = "ubuntu/xenial64"
+#     ubuntu_vm.vm.box = "precise64"
 
 #     config.vm.define "dev_crm_ci", primary: false do |dev_crm_ci|
 #            dev_crm_ci.vm.network "private_network",  ip: "192.168.11.50"
