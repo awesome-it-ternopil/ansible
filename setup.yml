@@ -1,6 +1,6 @@
 --- # PB
 
-- hosts: ubuntu_vm
+- hosts: developer
   become: True
   vars:
 

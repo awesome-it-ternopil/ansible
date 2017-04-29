@@ -1,0 +1,10 @@
+---
+ubuntu:
+  version: 'xenial' #According to your distribution, replace 'yakkety' by 'xenial', 'vivid', 'utopic', 'trusty', 'raring', 'quantal', 'precise', 'lucid', 'jessie', 'wheezy', or 'squeeze'.
+
+virtualbox:
+  version: 5.0 # could also be 4.3 or 4.2 etc.
+#  user: vbox
+#  user_pw: changeme
+#  # should be sha512 encrypted value of above string (use mkpasswd --method=SHA-512 for example):
+#  user_sha_pw: "$6$rngaHnG3$PVgZgPKUIL0.JlnyzDPefV8p0ha/YgFPSZ58db9K0tVDrjoP7dWTvBC4xYv.I7GAT3sxeE.SgKPO/7p9M8HDl/"
