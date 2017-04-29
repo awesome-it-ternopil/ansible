@@ -1,16 +1,17 @@
 --- # PB
 
-- hosts: vagrant
+- hosts: ubuntu_vm
   become: True
+  vars:
 
   roles:
 #   - git
 #   - jdk
 #   - vagrant
 #   - idea
-   - mc
+#   - mc
 #   - sbt
-#   - virtualbox
+   - virtualbox
 #   - mysql
 
    

@@ -1,38 +1,42 @@
 ---
-- name: Check if my_package is installed
-  command: dpkg-query -W my_package
-  -W -f="${Version}"
+#- include: use-rpm.yml
+#  when: ansible_os_family == "RedHat"
 
+- include: use-apt.yml
+  when: ansible_os_family == "Debian"
+
+- name: Check if my_package is installed
+  command: dpkg-query -W -f="${version}" virtualbox
   register: my_package_check_deb
   failed_when: my_package_check_deb.rc > 1
   changed_when: my_package_check_deb.rc == 1
 
-  - name: Download my_package
-    get_url:
-      url="{{ my_package_url }}"
-      dest="/home/{{ ansible_env.USER }}/Downloads/{{ my_package_name }}.deb"
-    when: vagrant_check_deb.rc == 1
-
-- name: Install my_package
-  apt: deb="/home/{{ ansible_env.USER }}/Downloads/{{ my_package_name }}.deb"
-  sudo: true
-  when: vagrant_check_deb.rc == 1
-
-- name: Add "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" to /etc/apt/sources.list
-  become: True
-  shell: echo "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" >> /etc/apt/sources.list
-
-- name: Download and register
-  become: True
-  shell: wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-
-- name: Download and register
-  become: True
-  shell: wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-
-- name: Install virtualbox
-  become: True
-  apt:
-   name: virtualbox-5.1
-   state: latest
-   update_cache: yes
+#  - name: Download my_package
+#    get_url:
+#      url="{{ my_package_url }}"
+#      dest="/home/{{ ansible_env.USER }}/Downloads/{{ my_package_name }}.deb"
+#    when: vagrant_check_deb.rc == 1
+#
+#- name: Install my_package
+#  apt: deb="/home/{{ ansible_env.USER }}/Downloads/{{ my_package_name }}.deb"
+#  sudo: true
+#  when: vagrant_check_deb.rc == 1
+#
+#- name: Add "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" to /etc/apt/sources.list
+#  become: True
+#  shell: echo "deb http://download.virtualbox.org/virtualbox/debian xenial contrib" >> /etc/apt/sources.list
+#
+#- name: Download and register
+#  become: True
+#  shell: wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+#
+#- name: Download and register
+#  become: True
+#  shell: wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+#
+#- name: Install virtualbox
+#  become: True
+#  apt:
+#   name: virtualbox-5.1
+#   state: latest
+#   update_cache: yes

@@ -4,9 +4,9 @@
   become: yes
   apt: update_cache=yes
 
-- name: Install mysql 5.5
+- name: Install virtualbox
   become: yes
-  apt: name=mysql-server-5.5 state=latest
+  apt: name=virtualbox-{{version}} state=latest
 
 - name: Install the Python MySQLB module
   become: yes
