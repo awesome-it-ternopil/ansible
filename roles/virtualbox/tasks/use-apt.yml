@@ -1,20 +1,4 @@
 ---
-#- name: Updade all packages
-#  become: yes
-#  apt: update_cache=yes
-
-#- debug:
-#    msg: "System {{ virtualbox.version }}"
-
-- name: Install build-esential and dkms (prepare)
-  apt:
-    name: "{{ item }}"
-    state: latest
-    update_cache: yes
-  with_items:
-    - build-essential
-    - dkms
-    - unzip
 
 - name: Add VirtualBox repo key
   apt_key:
@@ -57,16 +41,3 @@
 - name: Install VirtualBox extension pack
   shell: "VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.2.vbox-extpack"
   when: 'extpack_list.stdout == "Extension Packs: 0"'
-
-
-#- name: Install virtualbox
-#  become: yes
-#  apt: name=virtualbox-{{ virtualbox.version }} state=latest
-
-#- name: Install the Python MySQLB module
-#  become: yes
-#  apt: name=python-mysqldb state=latest
-#
-#- name: Template mysql conf file
-#  become: yes
-#  template: src=roles/mysql/templates/for-ubuntu-my.cnf.j2 dest=/etc/mysql/my.cnf owner=root mode=0644

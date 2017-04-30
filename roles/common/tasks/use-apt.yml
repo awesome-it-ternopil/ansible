@@ -1,0 +1,20 @@
+---
+- name: Install build-esential and dkms (prepare)
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+      - build-essential
+      - git
+      - libselinux-python
+      - mc
+      - htop
+      - vim
+      - nano
+      - screen
+      - python-setuptools
+      - dkms
+      - unzip
+  ignore_errors: yes
+

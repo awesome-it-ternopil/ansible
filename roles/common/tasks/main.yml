@@ -1,0 +1,6 @@
+---
+- include: use-rpm.yml
+  when: ansible_os_family == "RedHat"
+
+- include: use-apt.yml
+  when: ansible_os_family == "Debian"
