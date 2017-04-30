@@ -1,0 +1,17 @@
+---
+# Vagrant installation
+- name: Check if vagrant is installed
+  command: dpkg-query -l {{ vagrant.dep_version }}
+  register: deb_check
+
+- name: Downloading vagrant
+  become: True
+  get_url:
+    url: "https://releases.hashicorp.com/vagrant/{{ vagrant.version }}/{{ vagrant.dep_version }}.deb"
+    dest: "{{ vagrant.download_destination }}"
+    when: deb_check.stdout.find('no packages found') != -1
+
+- name : Install vagrant
+  become: True
+  apt: deb="{{ vagrant.download_destination }}/{{ vagrant.dep_version }}.deb"
+  when: deb_check.stdout.find('no packages found') != -1

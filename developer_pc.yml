@@ -5,13 +5,12 @@
   vars:
 
   roles:
-#   - git
+  - common
 #   - jdk
 #   - vagrant
 #   - idea
-#   - mc
 #   - sbt
-   - virtualbox
+  - virtualbox
 #   - mysql
 
    

@@ -1,6 +1,13 @@
 ---
 ubuntu:
-  version: 'xenial' #According to your distribution, replace 'yakkety' by 'xenial', 'vivid', 'utopic', 'trusty', 'raring', 'quantal', 'precise', 'lucid', 'jessie', 'wheezy', or 'squeeze'.
+
+python:
+  version: 2.7
+
+vagrant:
+  version: 1.9.4
+  dep_version: vagrant_1.9.4_x86_64
+  download_destination: /home/{{ user }}/Documents
 
 virtualbox:
   version: 5.0 # could also be 4.3 or 4.2 etc.
