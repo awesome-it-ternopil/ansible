@@ -5,12 +5,14 @@
   vars:
 
   roles:
+  - ansible
 #  - common
 #   - jdk
-   - vagrant
 #   - idea
-#   - sbt
-#  - virtualbox
 #   - mysql
+#   - python
+#   - sbt
+#   - vagrant
+#   - virtualbox
 
    
