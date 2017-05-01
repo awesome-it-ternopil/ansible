@@ -7,7 +7,7 @@ python:
 vagrant:
   version: 1.9.4
   dep_version: vagrant_1.9.4_x86_64
-  download_destination: /home/{{ user }}/Documents
+  download_destination: /tmp
 
 virtualbox:
   version: 5.0 # could also be 4.3 or 4.2 etc.

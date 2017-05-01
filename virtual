@@ -1,4 +1,4 @@
-[developer]
+[develop]
 ubuntu_vm ansible_host=192.168.33.50
 
 [region:vars]
@@ -14,4 +14,4 @@ ansible_ssh_port= 22
 ##################################
 
 [region:children]
-developer
+develop

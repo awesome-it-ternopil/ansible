@@ -1,5 +1,5 @@
 ---
-- name: Install build-esential and dkms (prepare)
+- name: Install common packets
   apt:
     name: "{{ item }}"
     state: latest
@@ -7,13 +7,12 @@
   with_items:
       - build-essential
       - git
-      - libselinux-python
+#      - libselinux-python
       - mc
       - htop
       - vim
       - nano
       - screen
-      - python-setuptools
       - dkms
       - unzip
   ignore_errors: yes

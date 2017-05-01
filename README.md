@@ -1,3 +1,5 @@
 # ansible
 Run ansible playbook
-```sudo ansible-playbook main.yml --extra-vars "user=USERNAME"```
+```
+ansible-playbook -i virtual developer_pc.yml --extra-vars "user=USERNAME"
+```

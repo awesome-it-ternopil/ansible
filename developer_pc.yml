@@ -1,16 +1,16 @@
 --- # PB
 
-- hosts: developer
+- hosts: develop
   become: True
   vars:
 
   roles:
-  - common
+#  - common
 #   - jdk
-#   - vagrant
+   - vagrant
 #   - idea
 #   - sbt
-  - virtualbox
+#  - virtualbox
 #   - mysql
 
    

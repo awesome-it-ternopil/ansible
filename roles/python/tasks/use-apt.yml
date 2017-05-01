@@ -1,0 +1,14 @@
+---
+- name: Install common packets
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - python{{ python.version }}
+    - python-pip
+    - python-dev
+    - python-setuptools #
+  ignore_errors: yes
+
+
