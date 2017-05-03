@@ -6,13 +6,13 @@
 
   roles:
   - ansible
-#  - common
+  - common
+  - vagrant
+  - virtualbox
 #   - jdk
 #   - idea
 #   - mysql
 #   - python
 #   - sbt
-#   - vagrant
-#   - virtualbox
 
    

@@ -2,7 +2,7 @@
 
 - name: Add ansible repository
   apt_repository:
-    repo: 'ppa:nginx/stable'
+    repo: 'ppa:ansible/ansible'
 
 - name: Install ansible
   apt:
