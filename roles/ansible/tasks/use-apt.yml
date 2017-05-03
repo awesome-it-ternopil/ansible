@@ -1,20 +1,12 @@
 ---
-- name: Install common packets
+
+- name: Add ansible repository
+  apt_repository:
+    repo: 'ppa:nginx/stable'
+
+- name: Install ansible
   apt:
-    name: "{{ item }}"
+    name: ansible
     state: latest
     update_cache: yes
-  with_items:
-      - build-essential
-      - git
-#      - libselinux-python
-      - software-properties-common
-      - mc
-      - htop
-      - vim
-      - nano
-      - screen
-      - dkms
-      - unzip
   ignore_errors: yes
-
