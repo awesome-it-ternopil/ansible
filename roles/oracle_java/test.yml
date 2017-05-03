@@ -1,0 +1,9 @@
+- hosts: all
+  become: True
+  tasks:
+    - include: 'tasks/originaldash.yml'
+  vars_files:
+    - 'defaults/originaldash.yml'
+
+  vars:
+    java_version: 8

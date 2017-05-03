@@ -1,0 +1,25 @@
+---
+#
+#- name: Install ansible
+#  apt:
+#    name: google-chrome-stable
+#    state: latest
+#    update_cache: yes
+#  ignore_errors: yes
+
+
+- name: Add chrome repo key
+  apt_key:
+    url: "https://dl-ssl.google.com/linux/linux_signing_key.pub"
+    state: present
+
+- name: Add chrome repo
+  apt_repository:
+    repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+    state: present
+    update_cache: yes
+
+- name: Install chrome in given version
+  apt:
+    name: google-chrome-stable
+    state: present

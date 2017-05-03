@@ -4,12 +4,9 @@
 VAGRANTFILE_API_VERSION ="2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-#    config.ssh.insert_key = false
     config.ssh.forward_agent = true
-   config.ssh.username = "vagrant"
     config.ssh.username = "vagrant"
-#    config.ssh.insert_key = true
-#    ansible_ssh_private_key_file= '~/.vagrant.d/insecure_private_key'
+    config.ssh.username = "vagrant"
 
 
     config.vm.provider "virtualbox" do |vb|
@@ -33,6 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
 
+#    config.ssh.insert_key = true
+#    config.ssh.insert_key = false
+#    ansible_ssh_private_key_file= '~/.vagrant.d/insecure_private_key'
   # config.vm.define "dev_crm_db", primary: true do |dev_crm_db|
   #  dev_crm_db.vm.network "private_network",  ip: "192.168.33.45"
   # end

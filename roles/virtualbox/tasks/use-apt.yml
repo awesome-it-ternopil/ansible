@@ -4,20 +4,6 @@
   apt_key:
     url: "http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc"
     state: present
-#    when: (ansible_distribution_release == "xenial") or (ansible_distribution_release == "yakkety")
-
-#- name: Add VirtualBox repo key
-#  apt_key:
-#    url: "http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc"
-#    state: present
-#    when: not((ansible_distribution_release == "xenial")
-#              or
-#              (ansible_distribution_release == "yakkety")
-#              or
-#              (ansible_distribution_release is none)
-#              or
-#              (ansible_distribution_release | trim == '')
-#          )
 
 - name: Add VirtualBox repo
   apt_repository:
@@ -30,14 +16,14 @@
     name: virtualbox-{{virtualbox.version}}
     state: present
 
-- name: Check if extension pack is already installed
-  shell: "VBoxManage list extpacks"
-  register: extpack_list
-
-- name: Download VirtualBox extension pack
-  shell: "cd /tmp/ &&  wget http://download.virtualbox.org/virtualbox/{{virtualbox.version}}.2/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.2.vbox-extpack"
-  when: 'extpack_list.stdout == "Extension Packs: 0"'
-
-- name: Install VirtualBox extension pack
-  shell: "VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.2.vbox-extpack"
-  when: 'extpack_list.stdout == "Extension Packs: 0"'
+#- name: Check if extension pack is already installed
+#  shell: "VBoxManage list extpacks"
+#  register: extpack_list
+#
+#- name: Download VirtualBox extension pack
+#  shell: "cd /tmp/ &&  wget http://download.virtualbox.org/virtualbox/{{virtualbox.version}}.2/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.2.vbox-extpack"
+#  when: 'extpack_list.stdout == "Extension Packs: 0"'
+#
+#- name: Install VirtualBox extension pack
+#  shell: "VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.2.vbox-extpack"
+#  when: 'extpack_list.stdout == "Extension Packs: 0"'

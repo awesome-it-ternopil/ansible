@@ -1,4 +1,8 @@
 ---
+#- name: Add universe repository
+#  apt_repository:
+#    repo: 'universe'
+
 - name: Install common packets
   apt:
     name: "{{ item }}"

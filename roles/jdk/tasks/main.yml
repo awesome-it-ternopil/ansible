@@ -1,25 +1,42 @@
 ---
-# JDK installation
-- name: System update
-  become: True
-  apt: update_cache=true
-  
-- name: Install default JRE
-  become: True
-  apt: name=default-jre state=present
-  
-- name: Add repo
-  become: True
-  apt_repository: repo='ppa:webupd8team/java'
+# file: tasks/main.yml
+# Top-level installer for Oracle JDK.
+#
 
-- name: Set licence selected
-  become: True
-  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-  
-- name: Set licence seen
-  become: True
-  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
+- name: precondition - java_version
+  fail: msg="ERROR - required variable 'java_version' missing."
+  when: java_version is not defined
 
-- name: Install oracle java
-  become: True
-  apt: name=oracle-java8-installer state=latest update_cache=yes
+- name: precondition - java_subversion
+  fail: msg="ERROR - required variable 'java_subversion' missing."
+  when: java_subversion is not defined
+
+- name: precondition - java_install_jce
+  fail: msg="ERROR - required variable 'java_install_jce' missing."
+  when: java_install_jce is not defined
+
+- include: set-role-variables.yml
+
+
+
+- name: install libselinux-python binary for Ansible to work
+  yum: name=libselinux-python state=present
+  when: ansible_pkg_mgr == "yum"
+
+- name: copy scripts to server
+  copy: src="../files/check-java-version.sh"  dest="{{ java_download_path }}/"  mode="a+x"
+
+- name: check if specific version of Oracle JDK is installed?
+  shell: LC_ALL="en_US.UTF-8"  {{ java_download_path }}/check-java-version.sh  "{{ jdk_version }}"
+  register: jdk_info
+  changed_when: false
+  failed_when: jdk_info.rc > 0
+
+#- debug: var=jdk_info
+
+- include: install.yml
+  when: (jdk_info.stdout|from_json).not_found
+
+- name: delegate to JCE zip installation process
+  include: install_jce.yml
+  when: java_install_jce

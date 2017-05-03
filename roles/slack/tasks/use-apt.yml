@@ -1,0 +1,13 @@
+- name: Add slack repository
+  apt_repository:
+    repo: 'ppa:rael-gc/scudcloud'
+
+- name: Install slack
+  apt:
+    name: slack
+    state: latest
+    update_cache: yes
+#  ignore_errors: yes
+
+
+https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb

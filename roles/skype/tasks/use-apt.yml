@@ -1,0 +1,33 @@
+---
+# Vagrant installation
+#- name: Check version of installed vagrant
+#  command: bash -c "dpkg -s vagrant |  awk '/^Version:/ {print substr($2,3)}'"
+##  command: dpkg-query -l {{ vagrant.dep_version }}
+#  register: deb_check
+#  ignore_errors: yes
+
+# need to test if uninstalling when not installed 1!!!!!!!!!!!!!!
+#- name: Uninstall other versions of vagrant
+#  apt:
+#      name: skype
+#      state: absent
+#  when: (deb_check.stdout != vagrant.version)
+#        or
+#        (deb_check.stdout is none)
+#        or
+#        (deb_check.stdout | trim == '')
+#
+#
+- name: Downloading skype
+  become: True
+  get_url:
+
+    url: "https://go.skype.com/skypeforlinux-64.deb"
+    dest: "/opt/skypeforlinux.deb"
+#  when: deb_check.stdout != vagrant.version
+
+
+- name : Install skype
+  become: True
+  apt: deb="/opt/skypeforlinux.deb"
+#  when: deb_check.stdout != vagrant.version

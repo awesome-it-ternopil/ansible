@@ -1,0 +1,32 @@
+---
+
+
+- unarchive:
+    src: https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.2.2314.tar.gz
+    dest: /opt/
+    remote_src: True
+
+#file:
+#      src=/opt/jetbrains-toolbox
+#      dest=/usr/bin/jetbrains-toolbox
+#      state=link
+#    become: true
+
+- name: Create desktop entry
+  file:
+#    become: True
+    template:
+      src=/opt/jetbrains-toolbox
+      dest=/usr/share/applications/jetbrains-toolbox.desktop
+      mode=755
+  with_items:
+    - {
+      name: "jetbrains-toolbox",
+      exec: "/opt/jetbrains-toolbox",
+      icon: "/opt/jetbrains-toolbox",
+      comment: "Develop with Intellij!",
+      categories: "Development;IDE",
+      startupwmclass: "jetbrains-toolbox"
+    }
+
+
