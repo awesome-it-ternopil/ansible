@@ -1,0 +1,31 @@
+---
+
+- name: Add docker repo key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+#    keyserver: keyserver.ubuntu.com
+        id: 36A1D7869245C8950F966E92D8576A8BA88D21E9
+    state: present
+
+- name: Add docker repo
+  apt_repository:
+    repo: 'deb https://get.docker.com/ubuntu docker main'
+    state: present
+    update_cache: yes
+
+- name: Install docker in given version
+  apt:
+    name: lxc-docker
+    state: latest
+
+#- name: Check if extension pack is already installed
+#  shell: "VBoxManage list extpacks"
+#  register: extpack_list
+#
+#- name: Download VirtualBox extension pack
+#  shell: "cd /tmp/ &&  wget http://download.virtualbox.org/virtualbox/{{virtualbox.version}}.2/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.2.vbox-extpack"
+#  when: 'extpack_list.stdout == "Extension Packs: 0"'
+#
+#- name: Install VirtualBox extension pack
+#  shell: "VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.2.vbox-extpack"
+#  when: 'extpack_list.stdout == "Extension Packs: 0"'
