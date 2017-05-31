@@ -17,3 +17,6 @@ node_modules/
 /ansible/logs
 /ansible/*.retry
 roles/virtualbox/vars/
+/keyrings/live/pubring.gpg~
+/keyrings/live/pubring.kbx~
+/keyrings/live/secring.gpg
