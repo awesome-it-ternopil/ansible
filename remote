@@ -1,8 +1,8 @@
 [develop]
-ubuntu_vm ansible_host=10.10.10.63
+ubuntu_vm ansible_host=10.20.10.124
 
 [region:vars]
-region_name='virtual'
+region_name='remote'
 ansible_ssh_user= user
 ansible_ssh_pass=useruser
 ansible_connection=ssh

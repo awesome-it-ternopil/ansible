@@ -8,13 +8,11 @@
   when: java_version is not defined
 
 - name: remove openJdk
-  become: yes
   yum:  name="*openjdk"
         state=absent
 
 ### for dev inventory
 - name: try install from /tmp/jdk-8u45-linux-x64.rpm
-  become: yes
   command: "yum localinstall /tmp/jdk-8*"
   ignore_errors: yes
 
@@ -62,7 +60,6 @@
     - debug
 
 - name: update /etc/alternatives settings for Java 8
-  become: yes
   command: "{{ jdk_download_path }}/update-alternatives.sh  {{ jdk8.jdk_version }}"
   ignore_errors: yes
   when: java_version == 8

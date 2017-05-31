@@ -1,32 +1,65 @@
 ---
 
+- name: check if jetbrains toolbox is installed
+  stat: path=/opt/jetbrains-toolbox
+  register: jetbrains_toolbox_folder
 
-- unarchive:
-    src: https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.2.2314.tar.gz
-    dest: /opt/
-    remote_src: True
+- name: Download jetbrains toolbox
+  get_url: url={{ jetbrains_toolbox_url }} dest=/tmp/toolbox.tar.gz
+  when: not jetbrains_toolbox_folder.stat.exists
 
-#file:
+- name: Unarchive jetbrains toolbox
+  unarchive: >
+        src=/tmp/toolbox.tar.gz
+        dest=/tmp
+        remote_src=yes
+        list_files=yes
+  when: not jetbrains_toolbox_folder.stat.exists
+  register: folder_name
+
+- name: folder_name
+  debug:
+        msg="{{ folder_name }}"
+
+- name: Copy jetbrains toolbox folder
+  command: mv /tmp/ideaIC-{{ jetbrains_toolbox_version }} /opt/jetbrains-toolbox
+  when: not jetbrains_toolbox_folder.stat.exists
+
+- name: Copy jetbrains toolbox icon
+  copy: src=icon.jpg dest=/opt/jetbrains-toolbox/icon.jpg
+  when: not jetbrains_toolbox_folder.stat.exists
+
+- name: add application launcher
+  template: src=launcher.j2 dest="~/.local/share/applications/jetbrains-toolbox.desktop"
+  become: no
+  when: not jetbrains_toolbox_folder.stat.exists
+
+#- unarchive:
+#    src: https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.2.2314.tar.gz
+#    dest: /opt/
+#    remote_src: True
+#
+##file:
+##      src=/opt/jetbrains-toolbox
+##      dest=/usr/bin/jetbrains-toolbox
+##      state=link
+##    become: true
+#
+#- name: Create desktop entry
+#  file:
+##    become: True
+#    template:
 #      src=/opt/jetbrains-toolbox
-#      dest=/usr/bin/jetbrains-toolbox
-#      state=link
-#    become: true
-
-- name: Create desktop entry
-  file:
-#    become: True
-    template:
-      src=/opt/jetbrains-toolbox
-      dest=/usr/share/applications/jetbrains-toolbox.desktop
-      mode=755
-  with_items:
-    - {
-      name: "jetbrains-toolbox",
-      exec: "/opt/jetbrains-toolbox",
-      icon: "/opt/jetbrains-toolbox",
-      comment: "Develop with Intellij!",
-      categories: "Development;IDE",
-      startupwmclass: "jetbrains-toolbox"
-    }
+#      dest=/usr/share/applications/jetbrains-toolbox.desktop
+#      mode=755
+#  with_items:
+#    - {
+#      name: "jetbrains-toolbox",
+#      exec: "/opt/jetbrains-toolbox",
+#      icon: "/opt/jetbrains-toolbox",
+#      comment: "Develop with Intellij!",
+#      categories: "Development;IDE",
+#      startupwmclass: "jetbrains-toolbox"
+#    }
 
 

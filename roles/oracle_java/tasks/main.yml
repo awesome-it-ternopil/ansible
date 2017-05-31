@@ -1,5 +1,5 @@
 ---
-# file: tasks/originaldash.yml
+# file: tasks/main.yml
 # Top-level installer for Oracle JDK.
 #
 

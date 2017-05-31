@@ -22,6 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
    config.vm.define "ubuntu_vm", primary: true do |ubuntu_vm|
      ubuntu_vm.vm.network "private_network",  ip: "192.168.33.50"
+     ubuntu_vm.vm.network "forwarded_port", guest: 80, host: 8080
      ubuntu_vm.vm.box = "bento/ubuntu-16.04"
    end
 

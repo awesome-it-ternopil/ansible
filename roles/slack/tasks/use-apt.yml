@@ -1,13 +1,25 @@
-- name: Add slack repository
-  apt_repository:
-    repo: 'ppa:rael-gc/scudcloud'
+---
+- name: apt-get update
+  apt: update_cache=true cache_valid_time=3600
+  sudo: yes
 
-- name: Install slack
-  apt:
-    name: slack
-    state: latest
-    update_cache: yes
-#  ignore_errors: yes
+- name: install gdebi
+  apt: name=gdebi
+  sudo: yes
 
+- name: Check if slack is installed
+  command: dpkg-query -W slack-desktop
+  register: check_slack
+  failed_when: false
+  changed_when: false
 
-https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb
+- name: Download Ubuntu slack package
+  command: "wget -O /tmp/slack-desktop.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-{{ slack.version }}-amd64.deb"
+  args:
+    creates: "/tmp/slack-desktop.deb"
+  when: check_slack.rc == 1
+
+- name: Install Ubuntu slack package
+  sudo: true
+  command: gdebi --non-interactive /tmp/slack-desktop.deb
+  when: check_slack.rc == 1
