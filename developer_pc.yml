@@ -5,16 +5,16 @@
   vars:
 
   roles:
-#  - ansible # +
-#  - common # +
+  - ansible # +
+  - common # +
 #  - chrome # +
-#  - docker # -
-#  - oracle_java # +
+  - docker # -
+  - oracle_java # +
 #  - jetbrains_toolbox # -
 #   - mysql #-
 #  - python # +
-#  - sbt # +
+  - sbt # +
 #  - skype # +
-#  - slack # +
-#  - vagrant # +
+  - slack # +
+  - vagrant # +
   - virtualbox # +

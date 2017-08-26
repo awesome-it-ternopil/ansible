@@ -14,7 +14,7 @@
       - dkms
       - htop
       - git
-#      - libselinux-python
+      - libselinux-python
       - mc
       - nano
       - screen

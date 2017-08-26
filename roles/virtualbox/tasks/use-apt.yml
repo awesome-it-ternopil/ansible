@@ -20,10 +20,10 @@
   shell: "VBoxManage list extpacks"
   register: extpack_list
 
-- name: Download VirtualBox extension pack
-  shell: "cd /tmp/ &&  wget http://download.virtualbox.org/virtualbox/{{virtualbox.version}}.{{virtualbox.extension_ver}}/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.{{virtualbox.extension_ver}}.vbox-extpack"
-  when: 'extpack_list.stdout == "Extension Packs: 0"'
-
-- name: Install VirtualBox extension pack
-  shell: "VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.{{virtualbox.extension_ver}}.vbox-extpack"
-  when: 'extpack_list.stdout == "Extension Packs: 0"'
+#- name: Download VirtualBox extension pack
+#  shell: "cd /tmp/ &&  wget http://download.virtualbox.org/virtualbox/{{virtualbox.version}}.{{virtualbox.extension_ver}}/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.{{virtualbox.extension_ver}}.vbox-extpack"
+#  when: 'extpack_list.stdout == "Extension Packs: 0"'
+#
+#- name: Install VirtualBox extension pack
+#  shell: "VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{virtualbox.version}}.{{virtualbox.extension_ver}}.vbox-extpack"
+#  when: 'extpack_list.stdout == "Extension Packs: 0"'
