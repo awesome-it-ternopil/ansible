@@ -6,7 +6,7 @@ region_name='remote'
 ansible_ssh_user= natali
 #ansible_ssh_pass=useruser
 ansible_connection=ssh
-ansible_ssh_port= 22
+ansible_ssh_port= 9722
 #ansible_ssh_private_key_file= '~/.vagrant.d/insecure_private_key'
 ansible_ssh_private_key_file= '~/Downloads/palamar'
 
