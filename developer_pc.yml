@@ -7,14 +7,8 @@
   roles:
   - ansible # +
   - common # +
-#  - chrome # +
-  - docker # -
+  - docker #
   - oracle_java # +
-#  - jetbrains_toolbox # -
-#   - mysql #-
-#  - python # +
   - sbt # +
-#  - skype # +
-  - slack # +
   - vagrant # +
   - virtualbox # +
